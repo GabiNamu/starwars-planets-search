@@ -1,27 +1,36 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
 import PlanetsContext from './PlanetsContext';
+import useFetch from '../hooks/useFetch';
+// import useFilterName from '../hooks/useFilterName';
 
 function PlanetsProvider({ children }) {
-  const [planets, setPlanets] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const { planets, fetchPlanets, loading,
+    errors, renderPlanets, setRenderPlanets } = useFetch();
+  const [filterName, setFilterName] = useState({ filter: '' });
 
-  const fetchPlanets = async (url) => {
-    setLoading(true);
-    const Promiseplanets = await fetch(url);
-    const ResponsePlanets = await Promiseplanets.json();
-    console.log(ResponsePlanets);
-    ResponsePlanets.results.map((planet) => {
-      delete planet.residents;
-      return planet;
+  const handleChange = (event) => {
+    console.log('oiii');
+    setFilterName({
+      ...filterName,
+      [event.target.name]: event.target.value,
     });
-    setPlanets(ResponsePlanets.results);
-    setLoading(false);
   };
 
+  useEffect(() => {
+    if (filterName.filter.length === 0) {
+      setRenderPlanets(planets);
+    } else {
+      const newPlanets = planets.filter(
+        ({ name }) => (name.toLowerCase()).includes(filterName.filter.toLowerCase()),
+      );
+      setRenderPlanets(newPlanets);
+    }
+  }, [filterName]);
+
   const values = useMemo(() => ({
-    planets, fetchPlanets, loading,
-  }), [planets, loading]);
+    planets, fetchPlanets, loading, errors, filterName, handleChange, renderPlanets,
+  }), [planets, loading, errors, renderPlanets, filterName]);
 
   return (
     <PlanetsContext.Provider value={ values }>
