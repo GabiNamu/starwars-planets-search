@@ -5,6 +5,9 @@ function Table() {
   const { planets, fetchPlanets,
     loading, filterName, handleChange,
     renderPlanets, setRenderPlanets } = useContext(PlanetsContext);
+  console.log(filterName);
+  const [colums, setColums] = useState(['population', 'orbital_period',
+    'diameter', 'rotation_period', 'surface_water']);
 
   useEffect(() => {
     fetchPlanets('https://swapi.dev/api/planets');
@@ -28,6 +31,9 @@ function Table() {
   const handleClick = () => {
     const newPlanets = renderPlanets.filter((planet) => {
       if (filters.quantity === 'menor que') {
+        console.log(filters.option);
+        console.log(Number(planet[filters.option]));
+        console.log(Number(planet[filters.option]) < Number(filters.number));
         return Number(planet[filters.option]) < Number(filters.number);
       }
       if (filters.quantity === 'igual a') {
@@ -39,7 +45,11 @@ function Table() {
       return planet;
     });
     console.log(newPlanets);
+    const newColums = colums.filter((colum) => colum !== filters.option);
+    console.log(newColums);
     setRenderPlanets(newPlanets);
+    setColums(newColums);
+    setFilters({ ...filters, option: newColums[0] });
   };
 
   if (loading) {
@@ -50,79 +60,85 @@ function Table() {
 
   return (
     <div>
-      <input
-        type="text"
-        data-testid="name-filter"
-        name="filter"
-        value={ filterName.filter }
-        onChange={ handleChange }
-      />
-      <select
-        name="option"
-        id=""
-        data-testid="column-filter"
-        value={ filters.option }
-        onChange={ handleChan }
-      >
-        <option value="population">population</option>
-        <option value="orbital_period">orbital_period</option>
-        <option value="diameter">diameter</option>
-        <option value="rotation_period">rotation_period</option>
-        <option value="surface_water">surface_water</option>
-      </select>
-      <select
-        name="quantity"
-        id=""
-        data-testid="comparison-filter"
-        value={ filters.quantity }
-        onChange={ handleChan }
-      >
-        <option value="maior que">maior que</option>
-        <option value="menor que">menor que</option>
-        <option value="igual a">igual a</option>
-      </select>
-      <input
-        type="number"
-        data-testid="value-filter"
-        name="number"
-        value={ filters.number }
-        onChange={ handleChan }
-      />
-      <button
-        data-testid="button-filter"
-        type="button"
-        onClick={ handleClick }
-      >
-        Filtrar
+      {planets && planets.length > 0 ? (
+        <div>
+          <input
+            type="text"
+            data-testid="name-filter"
+            name="filter"
+            value={ filterName.filter }
+            onChange={ handleChange }
+          />
+          <select
+            name="option"
+            id=""
+            data-testid="column-filter"
+            value={ filters.option }
+            onChange={ handleChan }
+          >
+            {colums.map((colum) => (
+              <option value={ colum } key={ colum }>{colum}</option>
+            ))}
+            {/* <option value="population">population</option>
+            <option value="orbital_period">orbital_period</option>
+            <option value="diameter">diameter</option>
+            <option value="rotation_period">rotation_period</option>
+            <option value="surface_water">surface_water</option> */}
+          </select>
+          <select
+            name="quantity"
+            id=""
+            data-testid="comparison-filter"
+            value={ filters.quantity }
+            onChange={ handleChan }
+          >
+            <option value="maior que">maior que</option>
+            <option value="menor que">menor que</option>
+            <option value="igual a">igual a</option>
+          </select>
+          <input
+            type="number"
+            data-testid="value-filter"
+            name="number"
+            value={ filters.number }
+            onChange={ handleChan }
+          />
+          <button
+            data-testid="button-filter"
+            type="button"
+            onClick={ handleClick }
+          >
+            Filtrar
 
-      </button>
+          </button>
+        </div>) : ''}
       <table>
         <thead>
           <tr>
             {planets && planets.length > 0 ? Object.keys(planets[0]).map((planetKey) => (
-              <th key={ planetKey }>{ planetKey }</th>
+              <th key={ planetKey }>{planetKey}</th>
             )) : ''}
           </tr>
         </thead>
 
         <tbody>
-          { renderPlanets.map((planet) => (
+          { planets && planets.length > 0 ? renderPlanets.map((planet) => (
             <tr key={ planet.url }>
-              <td>{ planet.name }</td>
-              <td>{ planet.rotation_period}</td>
-              <td>{ planet.orbital_period }</td>
-              <td>{ planet.diameter }</td>
-              <td>{ planet.climate }</td>
-              <td>{ planet.gravity }</td>
-              <td>{ planet.terrain }</td>
-              <td>{ planet.surface_water }</td>
-              <td>{ planet.population }</td>
-              <td>{ planet.films }</td>
-              <td>{ planet.created }</td>
-              <td>{ planet.edited }</td>
-              <td>{ planet.url }</td>
+              <td>{planet.name}</td>
+              <td>{planet.rotation_period}</td>
+              <td>{planet.orbital_period}</td>
+              <td>{planet.diameter}</td>
+              <td>{planet.climate}</td>
+              <td>{planet.gravity}</td>
+              <td>{planet.terrain}</td>
+              <td>{planet.surface_water}</td>
+              <td>{planet.population}</td>
+              <td>{planet.films}</td>
+              <td>{planet.created}</td>
+              <td>{planet.edited}</td>
+              <td>{planet.url}</td>
             </tr>
-          ))}
+          )) : ''}
         </tbody>
       </table>
     </div>
