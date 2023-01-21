@@ -29,7 +29,14 @@ function PlanetsProvider({ children }) {
   }, [filterName]);
 
   const values = useMemo(() => ({
-    planets, fetchPlanets, loading, errors, filterName, handleChange, renderPlanets,
+    planets,
+    fetchPlanets,
+    loading,
+    errors,
+    filterName,
+    handleChange,
+    renderPlanets,
+    setRenderPlanets,
   }), [planets, loading, errors, renderPlanets, filterName]);
 
   return (
