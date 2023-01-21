@@ -8,6 +8,7 @@ function Table() {
   console.log(filterName);
   const [colums, setColums] = useState(['population', 'orbital_period',
     'diameter', 'rotation_period', 'surface_water']);
+  const [renderFilter, setRenderFilter] = useState([]);
 
   useEffect(() => {
     fetchPlanets('https://swapi.dev/api/planets');
@@ -44,12 +45,54 @@ function Table() {
       }
       return planet;
     });
-    console.log(newPlanets);
     const newColums = colums.filter((colum) => colum !== filters.option);
-    console.log(newColums);
     setRenderPlanets(newPlanets);
     setColums(newColums);
     setFilters({ ...filters, option: newColums[0] });
+    setRenderFilter([...renderFilter,
+      `${filters.option} ${filters.quantity} ${filters.number}`]);
+  };
+
+  const handleRemove = (event) => {
+    const newThing = renderFilter.filter((filter) => filter !== event.target.id);
+    setRenderFilter(newThing);
+    const str = event.target.id.split(' ');
+    setColums([...colums, str[0]]);
+    console.log(newThing);
+    const newArray = newThing.reduce((acumulador, element) => {
+      const array = element.split(' ');
+      if (`${array[1]} ${array[2]}` === 'menor que') {
+        const newRender = acumulador.filter(
+          (planet) => Number(planet[array[0]]) < Number(array[3]),
+        );
+        console.log(newRender);
+        acumulador = newRender;
+        return newRender;
+      }
+      if (`${array[1]} ${array[2]}` === 'maior que') {
+        const newRender = acumulador.filter(
+          (planet) => Number(planet[array[0]]) > Number(array[3]),
+        );
+        acumulador = newRender;
+        return newRender;
+      }
+      const newRender = acumulador.filter(
+        (planet) => Number(planet[array[0]]) === Number(array[3]),
+      );
+      acumulador = newRender;
+      return acumulador;
+    }, planets);
+
+    console.log(newArray);
+    setRenderPlanets(newArray);
+  };
+
+  const handleRemoveAllFilters = () => {
+    console.log(planets);
+    setRenderPlanets(planets);
+    setRenderFilter([]);
+    setColums(['population', 'orbital_period',
+      'diameter', 'rotation_period', 'surface_water']);
   };
 
   if (loading) {
@@ -79,11 +122,6 @@ function Table() {
             {colums.map((colum) => (
               <option value={ colum } key={ colum }>{colum}</option>
             ))}
-            {/* <option value="population">population</option>
-            <option value="orbital_period">orbital_period</option>
-            <option value="diameter">diameter</option>
-            <option value="rotation_period">rotation_period</option>
-            <option value="surface_water">surface_water</option> */}
           </select>
           <select
             name="quantity"
@@ -112,6 +150,32 @@ function Table() {
 
           </button>
         </div>) : ''}
+      <div>
+        {renderFilter.length > 0 ? renderFilter.map((filter) => (
+          <div key={ filter } data-testid="filter">
+            <p>{filter}</p>
+            <button
+              type="button"
+              id={ filter }
+              onClick={ handleRemove }
+            >
+              X
+
+            </button>
+          </div>
+        )) : ''}
+        <div>
+          {renderFilter.length > 0 && (
+            <button
+              type="button"
+              data-testid="button-remove-filters"
+              onClick={ handleRemoveAllFilters }
+            >
+              Remover todas filtragens
+
+            </button>)}
+        </div>
+      </div>
       <table>
         <thead>
           <tr>
