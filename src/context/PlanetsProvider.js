@@ -10,7 +10,6 @@ function PlanetsProvider({ children }) {
   const [filterName, setFilterName] = useState({ filter: '' });
 
   const handleChange = (event) => {
-    console.log('oiii');
     setFilterName({
       ...filterName,
       [event.target.name]: event.target.value,

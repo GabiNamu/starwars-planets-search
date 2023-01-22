@@ -1,8 +1,4 @@
-const data = {
-    "count": 60,
-    "next": "https://swapi.dev/api/planets/?page=2",
-    "previous": null,
-    "results": [
+const data =  [
         {
             "name": "Tatooine",
             "rotation_period": "23",
@@ -187,6 +183,5 @@ const data = {
             "url": "https://swapi.dev/api/planets/10/"
         }
     ]
-}
 
 export default data;

@@ -1,18 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
+import useOrder from '../hooks/useOrder';
 
 function Table() {
-  const { planets, fetchPlanets,
-    loading, filterName, handleChange,
+  const { planets, fetchPlanets, loading, filterName, handleChange,
     renderPlanets, setRenderPlanets } = useContext(PlanetsContext);
-  console.log(filterName);
   const [colums, setColums] = useState(['population', 'orbital_period',
     'diameter', 'rotation_period', 'surface_water']);
   const [renderFilter, setRenderFilter] = useState([]);
-
+  const op = ['population', 'orbital_period',
+    'diameter', 'rotation_period', 'surface_water'];
+  const { order, handleClickOrder, handleOrder } = useOrder();
   useEffect(() => {
     fetchPlanets('https://swapi.dev/api/planets');
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const [filters, setFilters] = useState({
@@ -22,7 +22,6 @@ function Table() {
   });
 
   const handleChan = (event) => {
-    console.log('oiii');
     setFilters({
       ...filters,
       [event.target.name]: event.target.value,
@@ -149,6 +148,47 @@ function Table() {
             Filtrar
 
           </button>
+          <select
+            name="column"
+            id="column"
+            data-testid="column-sort"
+            value={ order.order.column }
+            onChange={ handleOrder }
+          >
+            {op.map((colum) => (
+              <option value={ colum } key={ colum }>{colum}</option>
+            ))}
+          </select>
+          <label htmlFor="radio-asc">
+            <p>ASC</p>
+            <input
+              type="radio"
+              id="radio-asc"
+              data-testid="column-sort-input-asc"
+              name="sort"
+              onChange={ handleOrder }
+              value="ASC"
+            />
+          </label>
+          <label htmlFor="radio-desc">
+            <p>DESC</p>
+            <input
+              type="radio"
+              id="radio-desc"
+              data-testid="column-sort-input-desc"
+              name="sort"
+              onChange={ handleOrder }
+              value="DESC"
+            />
+          </label>
+          <button
+            type="button"
+            data-testid="column-sort-button"
+            onClick={ handleClickOrder }
+          >
+            Ordenar
+          </button>
+
         </div>) : ''}
       <div>
         {renderFilter.length > 0 ? renderFilter.map((filter) => (
@@ -160,7 +200,6 @@ function Table() {
               onClick={ handleRemove }
             >
               X
-
             </button>
           </div>
         )) : ''}
@@ -188,7 +227,7 @@ function Table() {
         <tbody>
           { planets && planets.length > 0 ? renderPlanets.map((planet) => (
             <tr key={ planet.url }>
-              <td>{planet.name}</td>
+              <td data-testid="planet-name">{planet.name}</td>
               <td>{planet.rotation_period}</td>
               <td>{planet.orbital_period}</td>
               <td>{planet.diameter}</td>
@@ -208,5 +247,4 @@ function Table() {
     </div>
   );
 }
-
 export default Table;
