@@ -4,7 +4,7 @@ import App from '../App';
 import data from './data';
 import Table from '../components/Table';
 
-test('I am your test', async () => {
+test('I am your test ', async () => {
   global.fetch = jest.fn(() => Promise.resolve({
     json: () => Promise.resolve(data),
   }));
