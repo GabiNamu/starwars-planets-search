@@ -226,7 +226,7 @@ function Table() {
           <tbody>
             {renderPlanets.map((planet) => (
               <tr key={ planet.url }>
-                <td data-testid="planet-name">{planet.name}</td>
+                <td><p data-testid="planet-name">{planet.name}</p></td>
                 <td>{planet.rotation_period}</td>
                 <td>{planet.orbital_period}</td>
                 <td>{planet.diameter}</td>
