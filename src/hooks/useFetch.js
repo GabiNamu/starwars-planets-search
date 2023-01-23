@@ -7,8 +7,8 @@ function useFetch() {
   const [renderPlanets, setRenderPlanets] = useState(planets);
 
   const fetchPlanets = async (url) => {
-    setLoading(true);
     try {
+      setLoading(true);
       const Promiseplanets = await fetch(url);
       const ResponsePlanets = await Promiseplanets.json();
       console.log(ResponsePlanets);
@@ -21,6 +21,7 @@ function useFetch() {
       setLoading(false);
     } catch (error) {
       setErros(error.message);
+      // setLoading(false);
     }
   };
 

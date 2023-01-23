@@ -1,5 +1,5 @@
-const data =  [
-        {
+const data =  {
+    results: [{
             "name": "Tatooine",
             "rotation_period": "23",
             "orbital_period": "304",
@@ -182,6 +182,6 @@ const data =  [
             "edited": "2014-12-20T20:58:18.434000Z",
             "url": "https://swapi.dev/api/planets/10/"
         }
-    ]
+    ]};
 
 export default data;

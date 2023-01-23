@@ -1,9 +1,9 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import PlanetsContext from '../context/PlanetsContext';
 import useOrder from '../hooks/useOrder';
 
 function Table() {
-  const { planets, fetchPlanets, loading, filterName, handleChange,
+  const { planets, loading, filterName, handleChange,
     renderPlanets, setRenderPlanets } = useContext(PlanetsContext);
   const [colums, setColums] = useState(['population', 'orbital_period',
     'diameter', 'rotation_period', 'surface_water']);
@@ -11,9 +11,6 @@ function Table() {
   const op = ['population', 'orbital_period',
     'diameter', 'rotation_period', 'surface_water'];
   const { order, handleClickOrder, handleOrder } = useOrder();
-  useEffect(() => {
-    fetchPlanets('https://swapi.dev/api/planets');
-  }, []);
 
   const [filters, setFilters] = useState({
     option: 'population',
@@ -216,33 +213,35 @@ function Table() {
         </div>
       </div>
       <table>
-        <thead>
-          <tr>
-            {planets && planets.length > 0 ? Object.keys(planets[0]).map((planetKey) => (
-              <th key={ planetKey }>{planetKey}</th>
-            )) : ''}
-          </tr>
-        </thead>
-
-        <tbody>
-          { planets && planets.length > 0 ? renderPlanets.map((planet) => (
-            <tr key={ planet.url }>
-              <td data-testid="planet-name">{planet.name}</td>
-              <td>{planet.rotation_period}</td>
-              <td>{planet.orbital_period}</td>
-              <td>{planet.diameter}</td>
-              <td>{planet.climate}</td>
-              <td>{planet.gravity}</td>
-              <td>{planet.terrain}</td>
-              <td>{planet.surface_water}</td>
-              <td>{planet.population}</td>
-              <td>{planet.films}</td>
-              <td>{planet.created}</td>
-              <td>{planet.edited}</td>
-              <td>{planet.url}</td>
+        {planets && planets.length > 0 ? (
+          <thead>
+            <tr>
+              {Object.keys(planets[0]).map((planetKey) => (
+                <th key={ planetKey }>{planetKey}</th>
+              ))}
             </tr>
-          )) : ''}
-        </tbody>
+          </thead>) : '' }
+
+        { planets && planets.length > 0 ? (
+          <tbody>
+            {renderPlanets.map((planet) => (
+              <tr key={ planet.url }>
+                <td data-testid="planet-name">{planet.name}</td>
+                <td>{planet.rotation_period}</td>
+                <td>{planet.orbital_period}</td>
+                <td>{planet.diameter}</td>
+                <td>{planet.climate}</td>
+                <td>{planet.gravity}</td>
+                <td>{planet.terrain}</td>
+                <td>{planet.surface_water}</td>
+                <td>{planet.population}</td>
+                <td>{planet.films}</td>
+                <td>{planet.created}</td>
+                <td>{planet.edited}</td>
+                <td>{planet.url}</td>
+              </tr>
+            ))}
+          </tbody>) : ''}
       </table>
     </div>
   );
