@@ -90,13 +90,11 @@ function Table() {
     setColums(['population', 'orbital_period',
       'diameter', 'rotation_period', 'surface_water']);
   };
-
   if (loading) {
     return (
       <p>Loading...</p>
     );
   }
-
   return (
     <div>
       {planets && planets.length > 0 ? (
@@ -143,7 +141,6 @@ function Table() {
             onClick={ handleClick }
           >
             Filtrar
-
           </button>
           <select
             name="column"
@@ -185,7 +182,6 @@ function Table() {
           >
             Ordenar
           </button>
-
         </div>) : ''}
       <div>
         {renderFilter.length > 0 ? renderFilter.map((filter) => (
@@ -208,7 +204,6 @@ function Table() {
               onClick={ handleRemoveAllFilters }
             >
               Remover todas filtragens
-
             </button>)}
         </div>
       </div>
@@ -226,7 +221,13 @@ function Table() {
           <tbody>
             {renderPlanets.map((planet) => (
               <tr key={ planet.url }>
-                <td><p data-testid="planet-name">{planet.name}</p></td>
+                <td
+                  data-testid="planet-name"
+                  id={ planet.name }
+                >
+                  {planet.name}
+
+                </td>
                 <td>{planet.rotation_period}</td>
                 <td>{planet.orbital_period}</td>
                 <td>{planet.diameter}</td>
