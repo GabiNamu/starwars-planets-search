@@ -13,6 +13,7 @@ function useOrder() {
         (planet) => planet[order.order.column] !== 'unknown',
       );
       if (order.order.sort === 'ASC') {
+        console.log(order);
         obj.sort((a, b) => a[order.order.column] - b[order.order.column]);
         setRenderPlanets([...obj, ...unknown]);
         setOrder({ order: { column: 'population', sort: 'ASC' } });
@@ -22,12 +23,18 @@ function useOrder() {
         setOrder({ order: { column: 'population', sort: 'ASC' } });
       }
     } else if (order.order.sort === 'ASC') {
-      renderPlanets.sort((a, b) => a[order.order.column] - b[order.order.column]);
-      setRenderPlanets(renderPlanets);
+      console.log(order);
+      const pla = renderPlanets.sort(
+        (a, b) => a[order.order.column] - b[order.order.column],
+      );
+      console.log(pla);
+      setRenderPlanets([...pla]);
       setOrder({ order: { column: 'population', sort: 'ASC' } });
     } else {
-      renderPlanets.sort((a, b) => b[order.order.column] - a[order.order.column]);
-      setRenderPlanets(renderPlanets);
+      const planetnew = renderPlanets.sort(
+        (a, b) => b[order.order.column] - a[order.order.column],
+      );
+      setRenderPlanets([...planetnew]);
       setOrder({ order: { column: 'population', sort: 'ASC' } });
     }
   };

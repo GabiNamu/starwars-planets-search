@@ -1,41 +1,397 @@
-.App {
+body {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.548), rgba(0, 0, 0, 0.5)) , url('./image/star-wars.png');
+  background-size: cover;
+  font-family: Arial , Helvetica , sans-serif;
+  mix-blend-mode: normal;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.loading {
+  color: white;
+  font-size: 50px;
+  font-weight: 800;
 }
 
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.logo {
+  margin: auto;
+  text-align: center;
+  transition: 3s;
 }
 
-.App-header {
+.table-column {
+  height: 102px;
+  transition: 1s;
+  width: 1212px;
+}
+
+.table-column:hover {
+  background-color: #2e3035;
+}
+
+.table-film {
+
+  /* background-color: #f6e52b; */
+  color: #aeaeae;
+  height: 102px;
+  width: 356px;
+  word-break: break-all;
+}
+
+.table {
+  border-bottom: 1px solid white;
+  border-left: 1px solid white;
+  border-radius: 0 0 20px 20px;
+  border-right: 1px solid white;
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  margin-bottom: 40px;
+  width: 1222px;
+}
+
+.table-div-all-filters {
+  border-left: 1px solid white;
+  border-radius: 20px 20px 0 0;
+  border-right: 1px solid white;
+  border-top: 1px solid white;
+  height: 300px;
+  margin: auto;
+  width: 1222px;
+}
+
+.table-input-text {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid white;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: white;
+  display: block;
+  height: 42px;
+  margin: auto;
+  margin-top: 10px;
+  padding-left: 5px;
+  position: relative;
+  width: 671px;
+}
+
+.table-div-filters {
   align-items: center;
-  background-color: #282c34;
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  margin: auto;
+  margin-top: 50px;
+  width: 1000px;
+}
+
+.table-div-radio {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.table-column-select {
+  background-color: rgba(0, 0, 0, 0);
+  border: 0;
+  border-bottom: 1px solid white;
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+  width: 134px;
+}
+
+.table-column-select:hover {
+  cursor: pointer;
+}
+
+.tabble-column-select-label {
+  color: #aeaeae;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+.table-input-number {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid white;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: white;
+  height: 42px;
+  width: 91px;
+}
+
+.table-filter-button {
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid #fae60a;
+  border-radius: 5px;
+  box-sizing: border-box;
+  color: #fae60a;
+  font-size: 14px;
+  font-weight: 700;
+  height: 85px;
+  line-height: 18px;
+  text-transform: uppercase;
+  transition: 1s;
+  width: 91px;
+}
+
+.table-filter-button:hover {
+  background-color: #f6e52b;
+  color: white;
+  cursor: pointer;
+}
+
+.table-radio {
+  background-color: rgba(0, 0, 0, 0);
+  border: 2px solid #fae60a;
+  box-sizing: border-box;
+  color: #fae60a;
+  height: 20px;
+  width: 20px;
+}
+
+.table-radio:hover {
+  cursor: pointer;
+}
+
+.table-radio-name {
+  color: white;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 18px;
+}
+
+
+.table-radio:active {
+  border: 2px solid #fae60a;
+  color: #fae60a;
+}
+
+.table-thered {
+  margin: auto;
+  width: 1212px;
+}
+
+.table-tr-thered {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 1212px;
+}
+
+.table-th {
+  align-items: center;
+  background: #2e3035;
+  border: 1px solid black;
   color: white;
   display: flex;
-  flex-direction: column;
-  font-size: calc(10px + 2vmin);
+  flex-wrap: wrap;
   justify-content: center;
-  min-height: 100vh;
 }
 
-.App-link {
-  color: #61dafb;
+.table-name {
+  border-radius: 1px 0 0;
+  height: 70px;
+  text-align: center;
+  width: 102px;
 }
 
-@keyframes App-logo-spin {
+.table-rotation_period {
+  height: 69.72px;
+  width: 85.57px;
+  word-break: break-all;
+}
 
-  from {
-    transform: rotate(0deg);
-  }
+.table-orbital_period {
+  height: 69.72px;
+  width: 86.61px;
+  word-break: break-all;
+}
 
-  to {
-    transform: rotate(360deg);
-  }
+.table-diameter {
+  height: 69.72px;
+  width: 85.57px;
+}
+
+.table-climate {
+  height: 69.72px;
+  width: 86.61px;
+}
+
+.table-gravity {
+  height: 69.72px;
+  width: 104.35px;
+}
+
+.table-terrain {
+  height: 69.72px;
+  width: 104.35px;
+}
+
+.table-surface_water {
+  height: 69.72px;
+  width: 77.22px;
+  word-break: break-all;
+}
+
+.table-population {
+  height: 69.72px;
+  width: 124.18px;
+}
+
+.table-films {
+  height: 70px;
+  width: 356px;
+}
+
+.table-created {
+  height: 69.72px;
+  width: 124.18px;
+}
+
+.table-edited {
+  height: 69.72px;
+  width: 124.18px;
+}
+
+.table-url {
+  height: 69.72px;
+  width: 124.18px;
+}
+
+.table-tbody-name {
+  color: #aeaeae;
+  height: 70px;
+  width: 72px;
+}
+
+.table-tbody-rotation_period {
+  color: #aeaeae;
+  height: 69.72px;
+  width: 95.57px;
+}
+
+.table-tbody-orbital_period {
+  color: #aeaeae;
+  height: 69.72px;
+  width: 76.61px;
+}
+
+.table-tbody-diameter {
+  color: #aeaeae;
+  height: 69.72px;
+  width: 55.57px;
+}
+
+.table-tbody-climate {
+  color: #aeaeae;
+  height: 69.72px;
+  width: 56.61px;
+}
+
+.table-tbody-gravity {
+  color: #aeaeae;
+  height: 69.72px;
+  width: 84.35px;
+}
+
+.table-tbody-terrain {
+  color: #aeaeae;
+  height: 69.72px;
+  width: 74.35px;
+}
+
+.table-tbody-surface_water {
+  color: #aeaeae;
+  height: 69.72px;
+  width: 67.22px;
+  word-break: break-all;
+}
+
+.table-tbody-population {
+  color: #aeaeae;
+  height: 69.72px;
+  width: 104.18px;
+}
+
+.table-tbody-films {
+  color: #aeaeae;
+  height: 70px;
+  width: 356px;
+}
+
+.table-tbody-created {
+  color: #aeaeae;
+  height: 69.72px;
+  width: 124.18px;
+  word-break: break-all;
+}
+
+.table-tbody-edited {
+  color: #aeaeae;
+  height: 69.72px;
+  width: 124.18px;
+  word-break: break-all;
+}
+
+.table-tbody-url {
+  color: #aeaeae;
+  height: 69.72px;
+  width: 124.18px;
+  word-break: break-all;
+}
+
+.table-remove {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid #fae60a;
+  color: #fae60a;
+  font-weight: 800;
+  padding: 5px 10px;
+  transition: 1s;
+}
+
+.table-remove-all {
+  background-color: rgba(0, 0, 0, 0);
+  border: 1px solid #fae60a;
+  color: #fae60a;
+  font-weight: 700;
+  margin-bottom: 20px;
+  padding: 5px;
+  transition: 1s;
+}
+
+.table-remove:hover {
+  background-color: #f6e52b;
+  color: white;
+  cursor: pointer;
+}
+
+.table-remove-all:hover {
+  background-color: #f6e52b;
+  color: white;
+  cursor: pointer;
+}
+
+.table-remove-name {
+  color: white;
+}
+
+.table-remove-div {
+  align-items: center;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.div-input-icon {
+  position: relative;
+}
+
+.search-icon {
+  color: white;
+  margin-left: 300px;
+  margin-top: 10px;
+  position: absolute;
 }
