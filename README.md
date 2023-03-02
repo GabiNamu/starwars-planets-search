@@ -12,18 +12,24 @@ StarWars Planets Search is a filter list of planets from the Star Wars universe 
 <img src="./src/img/filters.png" alt="filters" width="400px" heigth="450px">
 </div>
 
-## How to use:
+## Run Locally:
 - First clone the repository into your machine;
 
 ```
- git clone git@github.com:GabiNamu/trybewallet.git
+git clone git@github.com:GabiNamu/starwars-planets-search.git
 ```
-- After cloning, enter into the repository and install the dependencies;
+- Go to the project directory;
+
+```
+cd starwars-planets-search
+```
+
+- Install dependencies;
 
 ```
 npm install
 ```
-- Then to see in your browser, you just need to do a npm start;
+- Start the server;
 ```
 npm start
 ```
